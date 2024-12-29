@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
@@ -64,5 +65,34 @@ class UserController extends Controller
     {
         $user->delete();
         return response()->noContent();
+    }
+
+	public function login(Request $request)
+    {
+        // 1) Validate the request
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required|string',
+        ]);
+
+        // 2) Attempt to find the user by email
+        $user = User::where('email', $request->email)->first();
+
+        // 3) Check the user exists and password is correct
+        if (!$user || !Hash::check($request->password, $user->password)) {
+            return response()->json([
+                'message' => 'Invalid credentials'
+            ], 401);
+        }
+
+        // 4) Generate a token (using Sanctum)
+        $token = $user->createToken('API Token')->plainTextToken;
+
+        // 5) Return the token (and optionally user data)
+        return response()->json([
+            'access_token' => $token,
+            'token_type'   => 'Bearer',
+            'user'         => $user
+        ], 200);
     }
 }

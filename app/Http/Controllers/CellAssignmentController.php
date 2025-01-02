@@ -24,9 +24,10 @@ class CellAssignmentController extends Controller
      */
     public function store(Request $request)
     {
+		$userId = Auth::id();
+
         // 1) Build a validator with the required rules
         $validator = Validator::make($request->all(), [
-            'user_id'    => 'required|exists:users,id',
             'row'        => 'required|integer',
             'column'     => 'required|integer',
             'class_id'   => 'required|exists:classes,id',
@@ -45,7 +46,7 @@ class CellAssignmentController extends Controller
         // Create or update: if you want only one record per (user_id, row, column), use updateOrCreate
         $assignment = CellAssignment::updateOrCreate(
             [
-                'user_id' => $request->user_id,
+                'user_id' => $userId,
                 'row'     => $request->row,
                 'column'  => $request->column,
             ],

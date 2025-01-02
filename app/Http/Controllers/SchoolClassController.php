@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\SchoolClass;
 use Illuminate\Http\Request;
+use App\Models\Pupil;
 
 class SchoolClassController extends Controller
 {
@@ -63,4 +64,10 @@ class SchoolClassController extends Controller
 
         return response()->noContent();
     }
+
+	public function getPupilsByClass($classId)
+	{
+		$pupils = Pupil::where('class_id', $classId)->get();
+		return response()->json($pupils);
+	}
 }

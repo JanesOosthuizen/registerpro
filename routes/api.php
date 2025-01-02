@@ -23,6 +23,8 @@ Route::middleware('auth:sanctum')->group(function () {
 
 	 Route::apiResource('subjects', SubjectController::class);
 	 Route::apiResource('pupils', PupilController::class);
+	 Route::get('/classes/{classId}/pupils', [SchoolClassController::class, 'getPupilsByClass']);
+
 
 	 Route::post('/cell-assignments', [CellAssignmentController::class, 'store']);
 	Route::get('/cell-assignments', [CellAssignmentController::class, 'index']);

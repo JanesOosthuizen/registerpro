@@ -5,6 +5,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\SchoolClassController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\PupilController;
+use App\Http\Controllers\HeaderController;
 use App\Http\Controllers\CellAssignmentController;
 
 use Illuminate\Support\Facades\Route;
@@ -15,6 +16,7 @@ Route::middleware('api')->group(function () {
 });
 Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('schools', App\Http\Controllers\SchoolController::class);
+    Route::apiResource('headers', App\Http\Controllers\HeaderController::class);
     Route::apiResource('users', App\Http\Controllers\UserController::class);
 	Route::apiResource('classes', SchoolClassController::class)
      ->parameters([

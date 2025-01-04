@@ -77,7 +77,7 @@
         </p>
         <div class="cta-buttons">
             <a href="#download-ios">Download for iOS</a>
-            <a href="https://rpro.px2.co.za/public/application-b7d5072d-9301-4e5f-8852-1e86e992993f.apk">Download for Android</a>
+            <a href="https://rpro.px2.co.za/application-b7d5072d-9301-4e5f-8852-1e86e992993f.apk">Download for Android</a>
         </div>
     </div>
     <footer>

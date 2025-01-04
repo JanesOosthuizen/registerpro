@@ -21,7 +21,7 @@ class UserController extends Controller
         'surname' => 'required|string|max:255',
         'email' => 'required|email|unique:users,email',
         'password' => 'required|string|min:6',
-        'date_of_birth' => 'required|date'
+        'date_of_birth' => 'nullable|date'
     ]);
 
     if ($validator->fails()) {

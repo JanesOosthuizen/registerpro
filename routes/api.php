@@ -13,11 +13,12 @@ use Illuminate\Support\Facades\Route;
 // Define your API routes here
 Route::middleware('api')->group(function () {
 	Route::post('/login', [UserController::class, 'login']);
+	Route::post('/register', [App\Http\Controllers\UserController::class, 'store']); 
 });
 Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('schools', App\Http\Controllers\SchoolController::class);
     Route::apiResource('headers', App\Http\Controllers\HeaderController::class);
-    Route::apiResource('users', App\Http\Controllers\UserController::class);
+	Route::apiResource('users', App\Http\Controllers\UserController::class);
 	Route::apiResource('classes', SchoolClassController::class)
      ->parameters([
          'classes' => 'schoolClass'

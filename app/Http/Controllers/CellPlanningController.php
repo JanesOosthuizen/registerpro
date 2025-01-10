@@ -30,6 +30,24 @@ class CellPlanningController extends Controller
         return response()->json($item, 201);
     }
 
+    public function storeNoCell(Request $request)
+    {
+		$userId = Auth::id(); // Get the authenticated user
+
+		$payload = [
+            'cell_key' => null,
+            'class_name' => $request->className,
+            'subject' => $request->subject,
+            'pupils' => $request->pupils,
+            'content' => $request->content,
+			'user_id' => $userId,
+        ];
+
+        $item = PlanningItem::create($payload);
+
+        return response()->json($item, 201);
+    }
+
     public function update(Request $request, $id)
     {
         $item = PlanningItem::findOrFail($id);

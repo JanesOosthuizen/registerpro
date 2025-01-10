@@ -35,6 +35,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
 	Route::get('/planning', [CellPlanningController::class, 'getUserPlannings']);
 	Route::get('/planning/{cellKey}', [CellPlanningController::class, 'index']);
+	Route::post('/planning', [CellPlanningController::class, 'storeNoCell']);
 	Route::post('/planning/{cellKey}', [CellPlanningController::class, 'store']);
 	Route::put('/planning/{id}', [CellPlanningController::class, 'update']);
 	Route::delete('/planning/{id}', [CellPlanningController::class, 'destroy']);

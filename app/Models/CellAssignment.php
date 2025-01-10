@@ -15,6 +15,11 @@ class CellAssignment extends Model
         'column',
         'class_id',
         'subject_id',
+		'pupil_ids'
+    ];
+
+	protected $casts = [
+        'pupil_ids' => 'array',
     ];
 
     // Relationships

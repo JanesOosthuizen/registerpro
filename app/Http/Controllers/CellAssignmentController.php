@@ -32,6 +32,8 @@ class CellAssignmentController extends Controller
             'column'     => 'required|integer',
             'class_id'   => 'required|exists:classes,id',
             'subject_id' => 'required|exists:subjects,id',
+			'pupil_ids'  => 'required|array', 
+            'pupil_ids.*'=> 'exists:pupils,id',
         ]);
 
         // 2) Check if the validation fails
@@ -53,6 +55,7 @@ class CellAssignmentController extends Controller
             [
                 'class_id'   => $request->class_id,
                 'subject_id' => $request->subject_id,
+				'pupil_ids'  => $request->pupil_ids,
             ]
         );
 
@@ -91,6 +94,7 @@ class CellAssignmentController extends Controller
                 'subject_id'   => $assignment->subject_id,
                 'class_name'   => optional($assignment->classRelation)->name,
                 'subject_name' => optional($assignment->subject)->name,
+				'pupil_ids'    => $assignment->pupil_ids,
             ];
         });
 

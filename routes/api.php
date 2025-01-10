@@ -33,6 +33,7 @@ Route::middleware('auth:sanctum')->group(function () {
 	 Route::post('/cell-assignments', [CellAssignmentController::class, 'store']);
 	Route::get('/cell-assignments', [CellAssignmentController::class, 'index']);
 
+	Route::get('/planning', [CellPlanningController::class, 'getUserPlannings']);
 	Route::get('/planning/{cellKey}', [CellPlanningController::class, 'index']);
 	Route::post('/planning/{cellKey}', [CellPlanningController::class, 'store']);
 	Route::put('/planning/{id}', [CellPlanningController::class, 'update']);

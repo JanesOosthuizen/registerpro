@@ -19,5 +19,6 @@ class PlanningItem extends Model
         'subject',
         'pupils',
         'content',
+		'user_id',
     ];
 }

@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\PlanningItem;
+use Illuminate\Support\Facades\Auth;
 
 class CellPlanningController extends Controller
 {
@@ -13,13 +14,18 @@ class CellPlanningController extends Controller
 
     public function store(Request $request, $cellKey)
     {
-        $item = PlanningItem::create([
+		$userId = Auth::id(); // Get the authenticated user
+
+		$payload = [
             'cell_key' => $cellKey,
             'class_name' => $request->className,
             'subject' => $request->subject,
             'pupils' => $request->pupils,
             'content' => $request->content,
-        ]);
+			'user_id' => $userId,
+        ];
+
+        $item = PlanningItem::create($payload);
 
         return response()->json($item, 201);
     }
@@ -40,8 +46,19 @@ class CellPlanningController extends Controller
     public function destroy($id)
     {
         $item = PlanningItem::findOrFail($id);
+
         $item->delete();
 
         return response()->noContent();
     }
+
+	public function getUserPlannings(Request $request)
+	{
+		$userId = Auth::id(); // Get the authenticated user
+
+		// Assuming each planning item is linked to a user_id in the database
+		$plannings = PlanningItem::where('user_id', $userId)->get();
+
+		return response()->json($plannings, 200);
+	}
 }

@@ -7,6 +7,7 @@ use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\PupilController;
 use App\Http\Controllers\HeaderController;
 use App\Http\Controllers\CellAssignmentController;
+use App\Http\Controllers\CellPlanningController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -31,4 +32,9 @@ Route::middleware('auth:sanctum')->group(function () {
 
 	 Route::post('/cell-assignments', [CellAssignmentController::class, 'store']);
 	Route::get('/cell-assignments', [CellAssignmentController::class, 'index']);
+
+	Route::get('/planning/{cellKey}', [CellPlanningController::class, 'index']);
+	Route::post('/planning/{cellKey}', [CellPlanningController::class, 'store']);
+	Route::put('/planning/{id}', [CellPlanningController::class, 'update']);
+	Route::delete('/planning/{id}', [CellPlanningController::class, 'destroy']);
 });

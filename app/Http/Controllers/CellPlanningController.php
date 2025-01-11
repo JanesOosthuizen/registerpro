@@ -23,6 +23,7 @@ class CellPlanningController extends Controller
             'pupils' => $request->pupils,
             'content' => $request->content,
 			'user_id' => $userId,
+			'date' => $request->date, 
         ];
 
         $item = PlanningItem::create($payload);
@@ -41,6 +42,7 @@ class CellPlanningController extends Controller
             'pupils' => $request->pupils,
             'content' => $request->content,
 			'user_id' => $userId,
+			'date' => $request->date,
         ];
 
         $item = PlanningItem::create($payload);

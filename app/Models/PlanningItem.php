@@ -20,5 +20,6 @@ class PlanningItem extends Model
         'pupils',
         'content',
 		'user_id',
+		'date'
     ];
 }

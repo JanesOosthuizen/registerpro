@@ -13,6 +13,11 @@ class CellPlanningController extends Controller
         return PlanningItem::where('cell_key', $cellKey)->get();
     }
 
+    public function getById($id)
+    {
+        return PlanningItem::where('id', $id)->get();
+    }
+
     public function store(Request $request, $cellKey)
     {
 		$userId = Auth::id(); // Get the authenticated user

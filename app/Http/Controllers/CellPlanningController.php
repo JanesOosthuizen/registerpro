@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\PlanningItem;
+use App\Models\PlanningItemNote;
 use Illuminate\Support\Facades\Auth;
 
 class CellPlanningController extends Controller
@@ -81,4 +82,52 @@ class CellPlanningController extends Controller
 
 		return response()->json($plannings, 200);
 	}
+
+	public function getNotes($id)
+	{
+		$notes = PlanningItem::findOrFail($id)->notes;
+		return response()->json($notes);
+	}
+
+	public function addNote(Request $request, $id)
+	{
+		$request->validate([
+			'date' => 'required|date',
+			'content' => 'required|string',
+		]);
+
+		$note = PlanningItemNote::create([
+			'planning_item_id' => $id,
+			'date' => $request->date,
+			'content' => $request->content,
+		]);
+
+		return response()->json($note, 201);
+	}
+
+	public function updateNote(Request $request, $id)
+	{
+		$note = PlanningItemNote::findOrFail($id);
+
+		$request->validate([
+			'date' => 'required|date',
+			'content' => 'required|string',
+		]);
+
+		$note->update([
+			'date' => $request->date,
+			'content' => $request->content,
+		]);
+
+		return response()->json($note);
+	}
+
+	public function deleteNote($id)
+	{
+		$note = PlanningItemNote::findOrFail($id);
+		$note->delete();
+
+		return response()->json(['message' => 'Note deleted successfully.']);
+	}
+
 }

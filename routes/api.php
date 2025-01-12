@@ -39,4 +39,9 @@ Route::middleware('auth:sanctum')->group(function () {
 	Route::post('/planning/{cellKey}', [CellPlanningController::class, 'store']);
 	Route::put('/planning/{id}', [CellPlanningController::class, 'update']);
 	Route::delete('/planning/{id}', [CellPlanningController::class, 'destroy']);
+
+	Route::get('/planning/{id}/notes', [CellPlanningController::class, 'getNotes']);
+	Route::post('/planning/{id}/notes', [CellPlanningController::class, 'addNote']);
+	Route::put('/notes/{id}', [CellPlanningController::class, 'updateNote']);
+	Route::delete('/notes/{id}', [CellPlanningController::class, 'deleteNote']);
 });

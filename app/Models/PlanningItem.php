@@ -18,8 +18,11 @@ class PlanningItem extends Model
         'class_name',
         'subject',
         'pupils',
-        'content',
 		'user_id',
-		'date'
     ];
+
+	public function notes()
+    {
+        return $this->hasMany(PlanningItemNote::class);
+    }
 }

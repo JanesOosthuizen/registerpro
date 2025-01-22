@@ -8,6 +8,7 @@ use App\Http\Controllers\PupilController;
 use App\Http\Controllers\HeaderController;
 use App\Http\Controllers\CellAssignmentController;
 use App\Http\Controllers\CellPlanningController;
+use App\Http\Controllers\ToolsController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -45,4 +46,6 @@ Route::middleware('auth:sanctum')->group(function () {
 	Route::post('/planning/{id}/notes', [CellPlanningController::class, 'addNote']);
 	Route::put('/notes/{id}', [CellPlanningController::class, 'updateNote']);
 	Route::delete('/notes/{id}', [CellPlanningController::class, 'deleteNote']);
+
+	Route::post('/export-register', [ToolsController::class, 'exportRegister']);
 });

@@ -101,4 +101,35 @@ class CellAssignmentController extends Controller
         return response()->json($response, 200);
     }
 
+/**
+ * Delete a cell assignment.
+ *
+ * DELETE /cell-assignments/{id}
+ */
+public function destroy($row, $column)
+{
+    $userId = Auth::id();
+
+    // Find the assignment for the authenticated user with the given row and column
+    $assignment = CellAssignment::where('user_id', $userId)
+        ->where('row', $row)
+        ->where('column', $column)
+        ->first();
+
+    // If the assignment doesn't exist, return a 404 error
+    if (!$assignment) {
+        return response()->json([
+            'message' => 'Cell assignment not found.',
+        ], 404);
+    }
+
+    // Delete the assignment
+    $assignment->delete();
+
+    return response()->json([
+        'message' => 'Cell assignment deleted successfully.',
+    ], 200);
+}
+
+
 }

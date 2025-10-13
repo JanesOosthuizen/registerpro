@@ -11,12 +11,22 @@ use App\Http\Controllers\CellPlanningController;
 use App\Http\Controllers\ToolsController;
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
 
 // Define your API routes here
 Route::middleware('api')->group(function () {
 	Route::post('/login', [UserController::class, 'login']);
 	Route::post('/register', [App\Http\Controllers\UserController::class, 'store']); 
 });
+
+Route::get('/', function (Request $request) {
+    return response()->json([
+        'message' => 'API is running',
+        'version' => '1.0',  // Or pull from config
+        'timestamp' => now(),
+    ]);
+});
+
 Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('schools', App\Http\Controllers\SchoolController::class);
     Route::apiResource('headers', App\Http\Controllers\HeaderController::class);
